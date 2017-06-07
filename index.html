@@ -1,5 +1,9 @@
 <html>
-    <head></head>
+    <head>
+        <script src="../bower_components/fetch/fetch.js"></script>
+        <script src="../bower_components/promise-polyfill/promise.min.js"></script>
+        <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    </head>
     <body>
 
         <!--<form action="/upload" method="post">-->
@@ -8,15 +12,15 @@
             <button type="submit">Submit</button>
         </form>
 
-        <button id="target">Click</button>
+        <button id="native-trigger">Native Trigger</button>
+        <button id="polyfill-trigger">polyfill Trigger</button>
+        <button id="jquery-trigger">jquery Trigger</button>
+
         <script>
-            var button = document.querySelector('#target');
-            button.onclick = function () {
+            var nativeTrigger = document.querySelector('#native-trigger');
+            nativeTrigger.onclick = function () {
                 var request = new Request('/upload', {
                     method: 'POST',
-                    // headers: new Headers({
-                    //     'Content-Type': 'text/plain'
-                    // }),
                     body: {
                         'city': 'Beijing'
                     }
@@ -25,6 +29,43 @@
                     console.log(response);
                 }).then(function () {
 
+                })
+            }
+
+            var polyfillTrigger = document.querySelector('#polyfill-trigger');
+            polyfillTrigger.onclick = function () {
+                try {
+                    fetch('/upload', {
+                        method: 'POST',
+                        body: {
+                            'city': 'Beijing'
+                        }
+                    }).then(function(response) {
+                        alert(response)
+                    }).catch(function(error) {
+                        alert(error)
+                    });
+                } catch(e) {
+                    alert(e);
+                }
+            }
+
+            var jqueryTrigger = document.querySelector('#jquery-trigger');
+            jqueryTrigger.onclick = function () {
+                $.ajax({
+                    url: '/upload',
+                    method: 'POST',
+                    dataType: 'json',
+                    timeout: 1000 * 1,
+                    data: {
+                        'city': 'Beijing'
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(arguments);
+                    },
+                    complete: function (jqXHR, textStatus) {
+                        console.log(arguments);
+                    }
                 })
             }
         </script>

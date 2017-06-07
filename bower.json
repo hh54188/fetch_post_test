@@ -1,0 +1,9 @@
+{
+  "name": "fetch_post_test",
+  "version": "0.0.1",
+  "dependencies": {
+    "fetch": "^2.0.3",
+    "promise-polyfill": "^6.0.2",
+    "jquery": "^3.2.1"
+  }
+}
