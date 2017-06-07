@@ -1,0 +1,32 @@
+<html>
+    <head></head>
+    <body>
+
+        <!--<form action="/upload" method="post">-->
+        <form action="/upload" method="post"  enctype="multipart/form-data">
+            <input type="text" name="city" value="Beijing">
+            <button type="submit">Submit</button>
+        </form>
+
+        <button id="target">Click</button>
+        <script>
+            var button = document.querySelector('#target');
+            button.onclick = function () {
+                var request = new Request('/upload', {
+                    method: 'POST',
+                    // headers: new Headers({
+                    //     'Content-Type': 'text/plain'
+                    // }),
+                    body: {
+                        'city': 'Beijing'
+                    }
+                })
+                fetch(request).then(function (response) {
+                    console.log(response);
+                }).then(function () {
+
+                })
+            }
+        </script>
+    </body>
+</html>
