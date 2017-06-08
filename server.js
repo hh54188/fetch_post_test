@@ -11,7 +11,9 @@ const app = express();
 const bodyParser = require('body-parser')
 app.use(express.static('.'));
 
-app.use( bodyParser.json({ type: 'secret' }) );       // to support JSON-encoded bodies
+app.use( bodyParser.json({ type: (req) => {
+    return req.get('Content-Type') === 'secret'
+} }) );       // to support JSON-encoded bodies
 app.use( bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }) ); 
