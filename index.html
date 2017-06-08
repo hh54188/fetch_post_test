@@ -21,9 +21,9 @@
             nativeTrigger.onclick = function () {
                 var request = new Request('/upload', {
                     method: 'POST',
-                    headers: new Headers({
-                        'Content-Type': 'secret'
-                    }),
+                    // headers: new Headers({
+                    //     'Content-Type': 'secret'
+                    // }),
                     body: JSON.stringify({
                         'city': 'Beijing'
                     })
