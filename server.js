@@ -16,7 +16,8 @@ app.use( bodyParser.json({ type: (req) => {
 } }) );       // to support JSON-encoded bodies
 app.use( bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
-}) ); 
+}) );
+app.use( bodyParser.text() );
 
 app.post('/upload', function (req, res) {
     console.log(req.get('Content-Type'));

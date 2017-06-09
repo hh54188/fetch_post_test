@@ -40,16 +40,16 @@
                 try {
                     fetch('/upload', {
                         method: 'POST',
-                        body: {
+                        body: JSON.stringify({
                             'city': 'Beijing'
-                        }
+                        })
                     }).then(function(response) {
-                        alert(response)
+                        // alert(response)
                     }).catch(function(error) {
-                        alert(error)
+                        // alert(error)
                     });
                 } catch(e) {
-                    alert(e);
+                    console(e);
                 }
             }
 
@@ -58,11 +58,10 @@
                 $.ajax({
                     url: '/upload',
                     method: 'POST',
-                    dataType: 'json',
                     timeout: 1000 * 1,
-                    data: {
+                    data: JSON.stringify({
                         'city': 'Beijing'
-                    },
+                    }),
                     error: function (jqXHR, textStatus, errorThrown) {
                         console.log(arguments);
                     },
